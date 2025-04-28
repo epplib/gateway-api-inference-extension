@@ -25,9 +25,9 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
-	"sigs.k8s.io/gateway-api-inference-extension/internal/runnable"
-	tlsutil "sigs.k8s.io/gateway-api-inference-extension/internal/tls"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/bbr/handlers"
+	"sigs.k8s.io/gateway-api-inference-extension/pkg/util/runnable"
+	tlsutil "sigs.k8s.io/gateway-api-inference-extension/pkg/util/tls"
 )
 
 // ExtProcServerRunner provides methods to manage an external process server.

@@ -35,10 +35,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/metrics/filters"
-	"sigs.k8s.io/gateway-api-inference-extension/internal/runnable"
 	runserver "sigs.k8s.io/gateway-api-inference-extension/pkg/bbr/server"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/metrics"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/util/logging"
+	"sigs.k8s.io/gateway-api-inference-extension/pkg/util/runnable"
 )
 
 var (
