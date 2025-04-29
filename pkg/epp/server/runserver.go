@@ -33,7 +33,6 @@ import (
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/controller"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/datastore"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/handlers"
-	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/scheduling"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/util/runnable"
 	tlsutil "sigs.k8s.io/gateway-api-inference-extension/pkg/util/tls"
 )
@@ -49,6 +48,7 @@ type ExtProcServerRunner struct {
 	CertPath                                 string
 	UseStreaming                             bool
 	RefreshPrometheusMetricsInterval         time.Duration
+	Scheduler                                handlers.Scheduler
 
 	// This should only be used in tests. We won't need this once we don't inject metrics in the tests.
 	// TODO:(https://github.com/kubernetes-sigs/gateway-api-inference-extension/issues/432) Cleanup
@@ -137,7 +137,7 @@ func (r *ExtProcServerRunner) AsRunnable(logger logr.Logger) manager.Runnable {
 		} else {
 			srv = grpc.NewServer()
 		}
-		extProcServer := handlers.NewStreamingServer(scheduling.NewScheduler(r.Datastore), r.DestinationEndpointHintMetadataNamespace, r.DestinationEndpointHintKey, r.Datastore)
+		extProcServer := handlers.NewStreamingServer(r.Scheduler, r.DestinationEndpointHintMetadataNamespace, r.DestinationEndpointHintKey, r.Datastore)
 		extProcPb.RegisterExternalProcessorServer(
 			srv,
 			extProcServer,
