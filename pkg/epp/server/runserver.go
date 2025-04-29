@@ -29,13 +29,13 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
-	"sigs.k8s.io/gateway-api-inference-extension/internal/runnable"
-	tlsutil "sigs.k8s.io/gateway-api-inference-extension/internal/tls"
 	backendmetrics "sigs.k8s.io/gateway-api-inference-extension/pkg/epp/backend/metrics"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/controller"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/datastore"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/handlers"
 	"sigs.k8s.io/gateway-api-inference-extension/pkg/epp/scheduling"
+	"sigs.k8s.io/gateway-api-inference-extension/pkg/util/runnable"
+	tlsutil "sigs.k8s.io/gateway-api-inference-extension/pkg/util/tls"
 )
 
 // ExtProcServerRunner provides methods to manage an external process server.
