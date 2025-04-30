@@ -39,3 +39,25 @@ var defaultConfig = &SchedulerConfig{
 	picker:              defPlugin,
 	postSchedulePlugins: []plugins.PostSchedule{},
 }
+
+func NewSchedulerConfig(pre []plugins.PreSchedule, filters []plugins.Filter,
+	scorers map[plugins.Scorer]int, picker plugins.Picker,
+	post []plugins.PostSchedule) (*SchedulerConfig, error) {
+	cfg := *defaultConfig
+
+	if len(pre) > 0 {
+		cfg.preSchedulePlugins = append(cfg.preSchedulePlugins, pre...)
+	}
+	if len(filters) > 0 {
+		cfg.filters = append(cfg.filters, filters...)
+	}
+	if len(scorers) > 0 {
+		for name, scorer := range scorers {
+			cfg.scorers[name] = scorer
+		}
+	}
+	if picker != nil {
+		cfg.picker = picker
+	}
+	return &cfg, nil
+}
